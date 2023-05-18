@@ -1,0 +1,584 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url("background-image.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  #landing-page{
+    display:block;
+    color: white;
+  }
+
+  #create-and-join {
+    text-align: center;
+    display: none;
+    height: 100vh;
+  }
+  
+  .c-j-btns{
+    background-color: black;
+    border: none;
+    color: white;
+    padding: 200px 300px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    transition: transform 0.2s ease-in-out;
+    border-radius: 10px;
+    opacity: 0.75;
+    width: 45%;
+    height: 85%;
+  }
+  
+  .c-j-btns:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+  
+  #create-game{
+    display: none;
+    color: white;
+  }
+
+  #join-game{
+    display: none;
+    color: white;
+  }
+
+  /*start of main game UI*/
+  #grid-container{
+    display: none;
+    grid-template-columns: .5fr 2fr .5fr;
+    grid-template-rows: 1fr 2fr 1fr;
+    width: 100vw;
+    height: 100vh;
+    color: white;
+    background-color: darkgreen;
+    background: rgba(34, 138, 13, 0.5); 
+    gap: 2%;
+    overflow:hidden
+  }
+
+  #score-opp{
+    grid-row: 1;
+    grid-column: 1;
+    display: flex;
+    position: relative;
+      object-fit:cover;
+    overflow:hidden
+  }
+
+  #game-log{
+    user-select: none; 
+    grid-row: 2;
+    grid-column: 1;
+    background-color: rgb(51, 49, 49);
+    overflow:auto;
+  }
+
+  #score{
+    grid-row: 3;
+    grid-column: 1;
+    display: flex;
+    position: relative;
+      object-fit:cover;
+    overflow:hidden
+  }
+
+  #hand-opp{
+    grid-row: 1;
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+    opacity: 0.8;
+  }
+
+  #current-play{
+    user-select: none; 
+    grid-row: 2;
+    grid-column: 2;
+    border-radius: 25px;
+  }
+
+  #hand{
+    grid-row: 3;
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+    opacity: 0.8;
+  }
+
+  #scoreboard{
+    grid-row: 1 / span 3;
+    grid-column: 3;
+      display: flex;
+      position: relative;
+        }
+
+        .columnScore {
+          flex: 33.33%;
+          padding: 5px;
+         background-position: center;
+         background-size: cover;
+         border-left: 2px solid white;
+        }
+
+        #columnScore3{
+          background-image: url(cribBoard0-45.png);
+        }
+
+        #columnScore2{
+          background-image: url(cribBoard45-90.png);
+        }
+
+        #columnScore1{
+          background-image: url(cribBoard90-121.png);
+          border-left:none;
+        }
+
+        .peg {
+          width: 13px;
+          height: 13px;
+          background-color: #FFFFFF;
+          border: 2px solid #000000;
+          border-radius: 50%;
+          position:absolute;
+          top: 50%;
+          left: 50%;
+        }
+
+  #cut-deck-ui{
+    display: none;
+  }
+
+  #cut-deck-ui > img{
+    object-fit: cover;
+    width: 100%;
+    max-height: 100%;
+    position: relative;
+    top: 10%;
+  }
+
+  .card {
+    display: inline-block;
+    width: 100px;
+    height: 150px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+    position: relative;
+    animation: appear 1s ease-in-out forwards;
+    animation-delay: 0s;
+    opacity: 0;
+    margin: 1px;
+    transition: all 0.3s ease-out;
+  }
+  
+  .value {
+    font-size: 2.5em;
+    font-weight: bold;
+    position: absolute;
+    left: 5px;
+    user-select: none;
+  }
+  
+  .top {
+    top: 5px;
+  }
+  
+  /* TODO: single digit too far from edge */ 
+  .bottom {
+    bottom: 5px;
+    transform: rotate(180deg);
+    left: calc(50% + 10px);
+    user-select: none;
+  }
+  
+  .suit {
+    font-size: 6em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #000;
+    user-select: none;
+  }
+  
+  .hearts {
+    color: red;
+  }
+  
+  .spades {
+    color: #000;
+  }
+  
+  .clubs {
+    color: #000;
+  }
+  
+  .diamonds {
+    color: red;
+  }
+
+  .card .suit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 60px;
+    color: black;
+  }
+  
+  .card .suit.red {
+    color: red;
+  }
+
+  .card .back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  .cannot-play-card{
+    opacity: 0.5;
+    animation: none;
+  }
+
+  .game-log-message{
+    outline: #fff solid 1px;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+  }
+
+  /*game log message container*/
+  #game-log{
+    border-top: #fff solid 5px;
+    border-right: #fff solid 5px;
+    border-bottom: #fff solid 5px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+
+  /* cards we have played */
+  #current-play > .self{
+    float:left;
+    }
+  
+    /* cards opponent has played */
+    #current-play > .opp{
+      float:right;
+    }
+  
+  #current-play > .start-card{
+    float:left;
+    margin-right: 5%;
+  }
+  
+  @keyframes appear {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    margin: 10% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+    max-width: 800px;
+  }
+  
+  .score-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .score-container > div {
+    width: calc(33.33% - 10px);
+    margin-bottom: 20px;
+  }
+  
+  #closeModalButton {
+    width: 30%;
+   height: 50px;
+    display: block;
+    margin: 20px auto 0;
+    text-align: center;
+    border-radius: 5px;
+    background-color: #444944;
+    color: white;
+    cursor: pointer;
+  }
+
+  .button-in-current-play{
+  width: 30%;
+  height: 50px;
+  margin-top: 10px;
+  background-color: #444944;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  position: relative;
+  bottom: -55%;
+  margin-top: 10px;
+  border: 1px solid #fff;
+}
+
+.button-in-current-play:hover {
+  background-color: #555;
+}
+
+.go-button{
+  width: 5%;
+  height: 50px;
+  margin-top: 10px;
+  background-color: #444944;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  position: relative;
+  bottom: -55%;
+  margin-top: 10px;
+  border: 1px solid #fff;
+}
+
+
+#hand .card{
+  margin: auto;
+}
+
+/*on hover of cards playable, slight green glow*/
+#hand .card:hover{
+  box-shadow: 0 0 10px #00ff00;
+}
+
+#hand-opp .card{
+  margin: auto;
+  transition: margin 2s;
+}
+
+/* outlines and borders for hands */
+#hand {
+  border-top: 5px solid lightgreen;
+  border-left: 5px solid lightgreen;
+  border-right: 5px solid lightgreen;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  background-color: #444944;
+}
+
+#hand-opp {
+  border-bottom: 5px solid darkred;
+  border-left: 5px solid darkred;
+  border-right: 5px solid darkred;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  background-color: #444944;
+}
+
+.indicated {
+  outline: 6px solid #000;
+  animation: pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    outline-color: #000;
+  }
+  50% {
+    outline-color: #fff;
+  }
+  100% {
+    outline-color: #000;
+  }
+}
+
+/* Cards played by self */
+#current-play .self:hover {
+  background-color: #b3d6b3; /* Light green */
+}
+
+/* Cards played by opponent */
+#current-play .opp:hover {
+  background-color: #ffb3b3; /* Light red */
+}
+
+#cribRepMine{
+  display: none;
+}
+
+#cribRepOpp{
+  display: none;
+}
+
+#oppScoreNumericDisplay, #myScoreNumericDisplay{
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Style the background image */
+.bg-image {
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+/* Style the landing page container */
+#landing-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+/* Style the landing page text */
+#landing-page p {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: #fff;
+}
+
+/* Style the landing page form */
+#landing-page label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+
+#landing-page input[type="text"] {
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 1rem;
+}
+
+#landing-page button {
+  padding: 0.5rem 2rem;
+  border-radius: 5px;
+  border: none;
+  background-color: #91dcf3;
+  color: #070101;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#landing-page button:hover {
+  background-color: #a5bfdbd7;
+}
+
+#create-game {
+  text-align: center;
+  margin-top: 50px;
+}
+
+#create-game p {
+  font-size: 18px;
+  color: white;
+  margin-bottom: 10px;
+}
+
+#return-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#return-button:hover {
+  background-color: #45a049;
+}
+
+#join-game {
+  text-align: center;
+  margin-top: 50px;
+}
+
+#join-game p {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+#join-game label {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+#join-game input[type="text"] {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 200px;
+  margin-bottom: 10px;
+}
+
+#join-game #submit-game-code,
+#join-game #return-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#join-game #submit-game-code:hover,
+#join-game #return-button:hover {
+  background-color: #45a049;
+}

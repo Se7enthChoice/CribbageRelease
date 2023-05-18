@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/socket.io/socket.io.js"></script>
+    <script defer src="index.js"></script>
+    <title>Online Multiplayer Cribbage</title>
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+</head>
+<body>
+  <div class="bg-image"></div>
+  
+  <div id="landing-page">
+    <p>Welcome to Online Multiplayer Cribbage</p>
+    <label for="username">To begin please choose a username:</label>
+    <input type="text" id="username-input" name="username">
+    <button id="submit-username" onclick="verifyUsername()">Submit</button>
+  </div>
+
+	<div id="create-and-join">
+    <button class="c-j-btns" onclick="createGameButton()">Create Game</button>
+    <button class="c-j-btns" onclick="joinGameButton()">Join Game</button>
+  </div>
+  
+  <div id="create-game">
+    <p>Share this code with your friends so they can join your game:</p>
+    <button id="return-button" onclick="returnButton()">Back</button>
+  </div>
+
+  <div id="join-game">
+    <label for="join-game-txt">Please input the code of the game you wish to join:</label>
+    <input type="text" id="join-game-txt" name="join-game-txt">
+    <button id="submit-game-code" onclick="joinGame()">Join</button>
+    <button id="return-button" onclick="returnButton()">Back</button>
+  </div>
+
+  <div id="grid-container">
+    <div id="score-opp">
+      <img id="cribRepOpp" src="reverse-card-crib.png" alt="Cards in the Crib">
+      <div id="oppScoreNumericDisplay"></div>
+    </div>
+    <div id="game-log"></div>
+    <div id="score">
+      <img id="cribRepMine"src="reverse-card-crib.png" alt="Cards in the Crib">
+      <div id="myScoreNumericDisplay"></div>
+    </div>
+    <div id="hand-opp"></div>
+    <div id="hand"></div>
+    <div id="current-play">
+      <div id="cut-deck-ui">
+        <img src="reverse-card-full-deck.png">
+      </div>
+    </div>
+    <div id="scoreboard">
+      <div id="columnScore1" class="columnScore"></div>
+      <div id="columnScore2" class="columnScore"></div>
+      <div id="columnScore3" class="columnScore"></div>
+      <div class="peg" id="ourPeg"></div>
+      <div class="peg" id="theirPeg"></div>
+    </div>
+  </div>
+
+  <div id="scoreModal" class="modal">
+    <div class="modal-content">
+      <div class="score-container">
+        <div id="p0ScoreDisplay"></div>
+        <div id="p1ScoreDisplay"></div>
+        <div id="cribScoreDisplay"></div>
+      </div>
+      <button id="closeModalButton" class="button" type="button">Begin Next Round</button>
+    </div>
+  </div>
+</body>
+</html>
