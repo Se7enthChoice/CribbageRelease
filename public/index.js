@@ -729,6 +729,7 @@ socket.on('end-of-round-scores', data => { //NOTE THAT THE OBJECT RETURNS THE AM
     btn.onclick = function() {
      modal.style.display = "none";
      socket.emit('confirm-proceed', {gameId : currentGameId});
+	  updateGameLog("Waiting for other player to proceed to next round!");
     }
 });
 
