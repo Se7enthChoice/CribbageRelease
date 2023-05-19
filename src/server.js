@@ -581,7 +581,7 @@ function findMaxSubarray(cardsPlayed) {
     //convert to scoring format
     var p0handConverted = convertCards(p0hand);
     //score hand
-    var player0scoreObj = p0handConverted.split('\n').map((x) => new Cribbage(x).score);
+    var player0scoreObj = p0handConverted.split('\n').map((x) => new EndRoundScoringLogic(x).score);
     console.log("player 0 score: " + player0scoreObj[0].score);
     //add adwarded points to player scores
     gameData[gameID].p0score += player0scoreObj[0].score;
@@ -594,7 +594,7 @@ function findMaxSubarray(cardsPlayed) {
     //convert to scoring format
     var p1handConverted = convertCards(p1hand);
     //score hand
-    var player1scoreObj = p1handConverted.split('\n').map((x) => new Cribbage(x).score);
+    var player1scoreObj = p1handConverted.split('\n').map((x) => new EndRoundScoringLogic(x).score);
     console.log("player 1 score: " + player1scoreObj[0].score);
     gameData[gameID].p1score += player1scoreObj[0].score;
     updateScoreOnClients(gameID, gameData[gameID].player1, player1scoreObj[0].score, " their hand.");
@@ -606,7 +606,7 @@ function findMaxSubarray(cardsPlayed) {
     //convert to scoring format
     var cribConverted = convertCards(cribToScore);
     //score crib
-    var cribScoreObj = cribConverted.split('\n').map((x) => new Cribbage(x).score);
+    var cribScoreObj = cribConverted.split('\n').map((x) => new EndRoundScoringLogic(x).score);
     //who is dealer? score crib for that player
     if(gameData[gameID].currentDealer == gameData[gameID].player0){ //player 0 is dealer
         console.log("player 0 score for crib: " + cribScoreObj[0].score);
@@ -634,7 +634,7 @@ function findMaxSubarray(cardsPlayed) {
   });
 }
 
-class Cribbage {
+class EndRoundScoringLogic {
 
     constructor(hand){
       this.hand = hand;
