@@ -108,8 +108,6 @@ socket.on('force-reload', data => {
 
 //^ cut deck for starter card
 socket.on('cut-deck-start', data => {
-    //update game log
-    updateGameLog("Cut deck to choose starter card.");
     console.log(data.deckToCut);
     //clear current play area
     document.getElementById("current-play").innerHTML = "";
@@ -123,6 +121,7 @@ socket.on('cut-deck-start', data => {
     addCutDeckEventListener(); //add event listener to cut-deck-ui
     //indicate current play for deck cut
     indicateElement("current-play");
+    //update game log
     updateGameLog('Cut the deck to choose the starting card');
 })
 
