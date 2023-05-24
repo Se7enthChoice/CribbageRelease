@@ -103,6 +103,7 @@ socket.on('force-reload', data => {
     addCutDeckEventListener(); //add event listener to cut-deck-ui
     //indicate current play for deck cut
     indicateElement("current-play");
+    updateGameLog('Cut the deck to decide who is the dealer');
   })
 
 //^ cut deck for starter card
@@ -122,6 +123,7 @@ socket.on('cut-deck-start', data => {
     addCutDeckEventListener(); //add event listener to cut-deck-ui
     //indicate current play for deck cut
     indicateElement("current-play");
+    updateGameLog('Cut the deck to choose the starting card');
 })
 
 //^ this function picks a card randomly from the deck, used for cutting deck
